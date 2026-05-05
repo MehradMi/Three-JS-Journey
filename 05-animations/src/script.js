@@ -1,4 +1,5 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
+import gsap from 'gsap';
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -8,7 +9,7 @@ const scene = new THREE.Scene()
 
 // Object
 const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+const material = new THREE.MeshBasicMaterial({ color: 'purple' })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
@@ -28,4 +29,62 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
-renderer.render(scene, camera)
+
+// Time
+/*
+let previousFrameTime = Date.now();
+*/
+
+// Clock
+/*
+const clock = new THREE.Clock();
+*/
+
+gsap.to(mesh.position, {
+	x: 2,
+	duration: 1,
+	delay: 1	
+});
+
+gsap.to(mesh.position, {
+	x: 0,
+	duration: 1,
+	delay: 2
+});
+
+// Animation
+const tick = () => {
+	
+	// Time
+	/*
+	const currentTime = Date.now();
+	const deltaTime   = currentTime - previousFrameTime;
+	previousFrameTime = currentTime;
+	*/
+	
+	// Clock
+	/*
+	const elapsedTime = clock.getElapsedTime();
+	
+	mesh.position.y = Math.sin(elapsedTime);
+	mesh.position.x = Math.cos(elapsedTime);
+	*/
+	
+	/*
+	camera.position.y = Math.sin(elapsedTime);
+	camera.position.x = Math.sin(elapsedTime);
+	camera.lookAt(mesh.position);
+	*/
+	
+	// Update
+	/*
+	mesh.rotation.y += .001 * deltaTime;
+	*/
+	
+	// Render
+	renderer.render(scene, camera)
+	
+	window.requestAnimationFrame(tick);
+};
+
+tick();
